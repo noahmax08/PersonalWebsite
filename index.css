@@ -1,0 +1,16 @@
+.iconImage {
+    position: fixed;    
+    height: 10%;
+    width: 10%;
+    background-color: #6c6c6c;
+    left: 45%;
+    top: 20%;
+}
+
+.loginButton {
+    position: fixed;    
+    height: 10%;
+    width: 10%;
+    left: 45%;
+    top: 40%;
+}
