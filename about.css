@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    height: 100vh;
+    background: #2b7a9e;
+    overflow: hidden;
+}
+
+.desktop {
+    height: calc(100vh - 48px);
+    padding: 24px;
+}
+
+.icons {
+    display: grid;
+    grid-template-columns: repeat(2, 80px);
+    gap: 24px;
+}
+
+.icon {
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.icon-emoji {
+    font-size: 48px;
+}
+
+.icon-label {
+    font-size: 12px;
+    color: white;
+    margin-top: 4px;
+}
+
+/* Windows */
+.window {
+    position: absolute;
+    top: 80px;
+    left: 120px;
+    width: 400px;
+    height: 300px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.window-titlebar {
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.closeButton:hover {
+    color: #ff5f57;
+}
+
+.window-content {
+    padding: 16px;
+}
+
+/* Taskbar */
+.taskBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: #1e1e1e;
+}
+
+.taskBar button {
+    height: 32px;
+    border: none;
+    border-radius: 4px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.taskBar button:hover {
+    background: #444;
+}
+
+.taskbarItems {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    padding: 0 12px;
+    overflow-x: auto; /* in case many windows are open */
+}
+
+.taskbarItem {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.taskbarItem:hover {
+    background: #555;
+}
+
+.taskbarItem.active {
+    background: #0078d7; /* highlight the "focused" window */
+}
+
+.hidden {
+    display: none;
+}
