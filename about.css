@@ -51,6 +51,8 @@ body {
     left: 120px;
     width: 400px;
     height: 300px;
+    min-width: 200px;
+    min-height: 150px;
     background: white;
     border-radius: 6px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.4);
@@ -82,6 +84,20 @@ body {
 
 .window-content {
     padding: 16px;
+}
+
+.resize-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 0;
+    bottom: 0;
+    cursor: nwse-resize;
+    background: linear-gradient(135deg, transparent 50%, #999 50%);
+}
+
+.resize-handle:hover {
+    background: linear-gradient(135deg, transparent 50%, #666 50%);
 }
 
 /* Taskbar */
@@ -117,7 +133,7 @@ body {
     gap: 8px;
     flex: 1;
     padding: 0 12px;
-    overflow-x: auto; /* in case many windows are open */
+    overflow-x: auto;
 }
 
 .taskbarItem {
@@ -140,7 +156,7 @@ body {
 }
 
 .taskbarItem.active {
-    background: #0078d7; /* highlight the "focused" window */
+    background: #0078d7;
 }
 
 .hidden {

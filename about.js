@@ -3,6 +3,7 @@ const closeButtons = document.querySelectorAll('.closeButton');
 const startButton = document.getElementById('startButton');
 const settingsButton = document.getElementById('settingsButton');
 const taskbarItems = document.getElementById('taskbarItems');
+const windows = document.querySelectorAll('.window');
 
 let zIndexCounter = 10; // tracks which window should be "on top"
 
@@ -12,6 +13,11 @@ icons.forEach(icon => {
         const folderName = icon.getAttribute('data-folder');
         openWindow(folderName);
     });
+});
+
+// Settings button - opens a window instead of navigating away
+settingsButton.addEventListener('click', function() {
+    openWindow('Settings');
 });
 
 function openWindow(folderName) {
@@ -29,10 +35,11 @@ function openWindow(folderName) {
         const item = document.createElement('button');
         item.className = 'taskbarItem';
         item.id = 'taskbarItem-' + folderName;
-        item.textContent = '📂 ' + folderName;
+
+        const emoji = folderName === 'Settings' ? '⚙️' : '📂';
+        item.textContent = emoji + ' ' + folderName;
 
         item.addEventListener('click', function() {
-            // Clicking the taskbar item brings that window to front
             windowEl.classList.remove('hidden');
             zIndexCounter++;
             windowEl.style.zIndex = zIndexCounter;
@@ -73,7 +80,72 @@ startButton.addEventListener('click', function() {
     window.location.href = 'https://google.com';
 });
 
-// Settings button - opens a window instead of navigating away
-settingsButton.addEventListener('click', function() {
-    openWindow('Settings');
+// Make all windows draggable by their titlebar
+windows.forEach(windowEl => {
+    const titlebar = windowEl.querySelector('.window-titlebar');
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    titlebar.addEventListener('mousedown', function(e) {
+        isDragging = true;
+
+        const rect = windowEl.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        zIndexCounter++;
+        windowEl.style.zIndex = zIndexCounter;
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+
+        let newX = e.clientX - offsetX;
+        let newY = e.clientY - offsetY;
+
+        newY = Math.max(0, newY);
+
+        windowEl.style.left = newX + 'px';
+        windowEl.style.top = newY + 'px';
+    });
+
+    document.addEventListener('mouseup', function() {
+        isDragging = false;
+    });
+});
+
+// Make all windows resizable via the bottom-right handle
+windows.forEach(windowEl => {
+    const resizeHandle = windowEl.querySelector('.resize-handle');
+    let isResizing = false;
+    let startX, startY, startWidth, startHeight;
+
+    resizeHandle.addEventListener('mousedown', function(e) {
+        isResizing = true;
+
+        startX = e.clientX;
+        startY = e.clientY;
+        startWidth = windowEl.offsetWidth;
+        startHeight = windowEl.offsetHeight;
+
+        zIndexCounter++;
+        windowEl.style.zIndex = zIndexCounter;
+
+        e.stopPropagation();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isResizing) return;
+
+        const newWidth = startWidth + (e.clientX - startX);
+        const newHeight = startHeight + (e.clientY - startY);
+
+        windowEl.style.width = newWidth + 'px';
+        windowEl.style.height = newHeight + 'px';
+    });
+
+    document.addEventListener('mouseup', function() {
+        isResizing = false;
+    });
 });
