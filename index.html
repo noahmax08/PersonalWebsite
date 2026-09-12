@@ -1,22 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-    <link rel="stylesheet" href= "index.css">
+    <link rel="stylesheet" href="index.css">
     <script src="index.js" defer></script>
-    <title> About me </title>
+    <title>My Desktop</title>
 </head>
-
-<!-- "Login Page" -->
 <body>
-    <div class = "iconImage">
-       
+
+    <div class="desktop">
+        <div class="icons">
+            <div class="icon" data-folder="Documents">
+                <div class="icon-emoji">📁</div>
+                <div class="icon-label">Documents</div>
+            </div>
+
+            <div class="icon" data-folder="Photos">
+                <div class="icon-emoji">📁</div>
+                <div class="icon-label">Photos</div>
+            </div>
+
+            <div class="icon" data-folder="Projects">
+                <div class="icon-emoji">📁</div>
+                <div class="icon-label">Projects</div>
+            </div>
+
+            <div class="icon" data-folder="Trash">
+                <div class="icon-emoji">🗑️</div>
+                <div class="icon-label">Trash</div>
+            </div>
+        </div>
     </div>
-    
-    <div class = "loginButton">
-        <button id = "loginButton"> press here </button>
+
+    <!-- Fake windows for each folder -->
+    <div class="window hidden" id="window-Documents">
+        <div class="window-titlebar">
+            <span>Documents</span>
+            <button class="closeButton" data-close="Documents">✕</button>
+        </div>
+        <div class="window-content">
+            <p>This is the Documents folder contents.</p>
+        </div>
+        <div class="resize-handle"></div>
     </div>
-    
+
+    <div class="window hidden" id="window-Photos">
+        <div class="window-titlebar">
+            <span>Photos</span>
+            <button class="closeButton" data-close="Photos">✕</button>
+        </div>
+        <div class="window-content">
+            <p>This is the Photos folder contents.</p>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window hidden" id="window-Projects">
+        <div class="window-titlebar">
+            <span>Projects</span>
+            <button class="closeButton" data-close="Projects">✕</button>
+        </div>
+        <div class="window-content">
+            <p>This is the Projects folder contents.</p>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window hidden" id="window-Trash">
+        <div class="window-titlebar">
+            <span>Trash</span>
+            <button class="closeButton" data-close="Trash">✕</button>
+        </div>
+        <div class="window-content">
+            <p>Trash is empty.</p>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="window hidden" id="window-Settings">
+        <div class="window-titlebar">
+            <span>Settings</span>
+            <button class="closeButton" data-close="Settings">✕</button>
+        </div>
+        <div class="window-content">
+            <p>Settings go here.</p>
+        </div>
+        <div class="resize-handle"></div>
+    </div>
+
+    <div class="taskBar">
+        <button id="startButton">🖥️ Start</button>
+        <div id="taskbarItems" class="taskbarItems"></div>
+        <button id="settingsButton" data-folder="Settings">⚙️ Settings</button>
+    </div>
+
 </body>
 </html>
